@@ -1,6 +1,6 @@
 <?php
-    require_once 'conexao.php';
-    require_once 'tabela/estado.php'; //importando o arquivo usuario.php (variaveis, funcoes)
+    require_once 'conexao_pdo.php';
+    require_once 'tabela/estadopdo.php'; //importando o arquivo usuario.php (variaveis, funcoes)
 ?>
 <!DOCTYPE html>
 <html lang="en">
