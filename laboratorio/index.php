@@ -91,6 +91,7 @@
         <p class="lead text-muted">O nosso laboratorio faz diversos exames a muitos....</p>
         <p>
           <a href="/laboratorio/medico.php" class="btn btn-primary my-2">Lista de médicos conveniados</a>
+          <a href="/laboratorio/cad_medico.php" class="btn btn-primary my-2">Cadastro de médicos conveniados</a>
           <a href="/laboratorio/tecnico.php" class="btn btn-secondary my-2">Lista de técnicos conveniados</a>
         </p>
       </div>

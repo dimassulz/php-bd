@@ -1,9 +1,25 @@
 <?php
-require_once 'core/conexao.php';
-require_once 'models/tbMedico.php';
+    require_once 'core/conexao.php';
+    require_once 'models/tbMedico.php';
 
-$tbMedico = buscarTodosMedicos($conn);
+    if(isset($_POST['nome']) && $_POST['crm']){
+        //vou mandar para o banco de dados
+        $dados = [
+            'nu_crm' => $_POST['crm'],
+            'no_medico' => $_POST['nome']
+        ];
+
+        try{
+            insertMedico($conn, $dados);
+            echo "<script>alert('Médico Inserido com sucesso!')</script>";
+        }catch(Exception $e){
+            echo "<script>alert('Ocorreu um erro ao inserir o médico, tente novamente mais tarde!')</script>";
+            echo '<script>alert("'.$e->getMessage().' Codigo erro: '.$e->getCode().'")</script>';
+        }
+    }
+
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -30,8 +46,6 @@ $tbMedico = buscarTodosMedicos($conn);
     <link rel="mask-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
     <link rel="icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#7952b3">
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
     <style>
@@ -91,31 +105,35 @@ $tbMedico = buscarTodosMedicos($conn);
     </header>
 
     <main>
+        <div class="container">
+            <div class="col-md-12 col-lg-12">
+                <h3 class="mb-3">Cadastro Médico</h3>
+                <form class="needs-validation" method="post" action="/laboratorio/cad_medico.php">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite um nome" value="" required>
+                            <div class="invalid-feedback">
+                                Nome é obrigatório
+                            </div>
+                        </div>
 
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <h1 class="fw-light">Confira os nossos médicos conveniados</h1>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">CRM</th>
-                            <th scope="col">NOME</th>
-                            <th scope="col">ACOES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($tbMedico as $medico) { ?>
-                            <tr>
-                                <td><?php echo $medico['co_medico']; ?></td>
-                                <td><?php echo $medico['nu_crm']; ?></td>
-                                <td><?php echo $medico['no_medico']; ?></td>
-                                <td><ion-icon name="create-outline"></ion-icon> <ion-icon name="trash-outline"></ion-icon></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">CRM</label>
+                            <input type="text" class="form-control" id="crm" name="crm" placeholder="Digite um CRM" value="" required>
+                            <div class="invalid-feedback">
+                                CRM é obrigatório
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="w-20 btn btn-outline-secondary btn-lg " type="button" onclick="window.location='/laboratorio'">Voltar</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="w-20 btn btn-primary btn-lg" type="submit">Cadastrar</button>
+                        </div>
+                </form>
             </div>
+        </div>
 
     </main>
 
