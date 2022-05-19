@@ -1,9 +1,9 @@
 <?php
 ### CONEXAO via PDO ###
 $servername = "localhost";
-$username = "senai2022";
-$password = "Teste@12";
-$dbname = "db_laboratorio_lara";
+$username = "";
+$password = "";
+$dbname = "db_laboratorio";
 
 // Create connection
 try {
